@@ -387,6 +387,7 @@ copyout(pde_t *pgdir, uint va, void *p, uint len)
 int mprotect(void *addr, int len) {
 	char *curr_addr, *end_addr;
 	pte_t *page;
+	len=PGROUNDUP(len);
 	curr_addr = (char *)PGROUNDDOWN((uint)addr);
 	end_addr = (char *)PGROUNDDOWN(((uint)addr) + len - 1);
 	for (;;) {
@@ -402,6 +403,7 @@ int mprotect(void *addr, int len) {
 int munprotect(void *addr, int len) {
 	char *curr_addr, *end_addr;
 	pte_t *page;
+	len=PGROUNDUP(len);
 	curr_addr = (char *)PGROUNDDOWN((uint)addr);
 	end_addr = (char *)PGROUNDDOWN(((uint)addr) + len - 1);
 	for (;;) {
