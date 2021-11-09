@@ -112,7 +112,7 @@ sys_getpinfo(void){
 int sys_mprotect(void) {
 	void* addr;
 	int len;
-	if (argptr(0, (char **)&addr, sizeof(void *)) || argint(1, &len) < 0)
+	if (argptr(0, (char **)&addr, sizeof(void *)) < 0 || argint(1, &len) < 0)
 		return -1;
 	if ((uint)addr % PGSIZE != 0 || len <= 0 || (uint)addr < PGSIZE)
 		return -1;
@@ -122,7 +122,7 @@ int sys_mprotect(void) {
 int sys_munprotect(void) {
 	void * addr;
 	int len;
-	if (argptr(0, (char **)&addr, sizeof(void *)) || argint(1, &len) < 0)
+	if (argptr(0, (char **)&addr, sizeof(void *)) < 0 || argint(1, &len) < 0)
 		return -1;
 	if ((uint)addr % PGSIZE != 0 || len <= 0 || (uint)addr < PGSIZE)
 		return -1;
